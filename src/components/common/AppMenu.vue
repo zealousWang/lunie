@@ -35,7 +35,7 @@
     <div class="app-menu-main">
       <router-link
         class="app-menu-item hide-xs"
-        to="/portfolio"
+        :to="`/${network}/portfolio`"
         exact="exact"
         title="Portfolio"
         @click.native="handleClick()"
@@ -47,7 +47,7 @@
       </router-link>
       <router-link
         class="app-menu-item hide-xs"
-        to="/validators"
+        :to="`/${network}/validators`"
         title="Validators"
         @click.native="handleClick()"
       >
@@ -59,7 +59,7 @@
 
       <router-link
         class="app-menu-item hide-xs"
-        to="/proposals"
+        :to="`/${network}/proposals`"
         title="Proposals"
         @click.native="handleClick()"
       >
@@ -71,7 +71,7 @@
 
       <router-link
         class="app-menu-item hide-xs"
-        to="/transactions"
+        :to="`/${network}/transactions`"
         exact="exact"
         title="Transactions"
         @click.native="handleClick()"

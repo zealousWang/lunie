@@ -10,6 +10,16 @@ export const routeGuard = (store, apollo) => async (to, from, next) => {
   // Set any open modal to false
   store.state.session.currrentModalOpen = false
 
+  // Set persisted network from networkId in URL
+  if (to.params.network) {
+    console.log(1, to.params.network)
+    store.dispatch(`setNetwork`, to.params.network)
+  } else {
+    store.dispatch(`checkForPersistedNetwork`).then(() => {
+      store.dispatch(`checkForPersistedSession`)
+    })
+  }
+
   // Redirect if fullPath begins with a hash (fallback for old pre history mode urls)
   if (to.fullPath.includes("#")) {
     const path = to.fullPath.substr(to.fullPath.indexOf("#") + 1)

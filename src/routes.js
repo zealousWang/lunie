@@ -9,17 +9,17 @@
 export default [
   {
     path: `/`,
-    redirect: `/portfolio`
+    redirect: `/:network/portfolio`
   },
   {
-    path: `/proposals`,
+    path: `/:network/proposals`,
     name: `Proposals`,
     meta: {
       feature: "Proposals"
     },
     component: () => import(`./components/governance/PageProposals`)
   },
-  // for depredecated routes
+  // for deprecated routes
   {
     path: `/governance/proposals`,
     redirect: `/proposals`
@@ -33,20 +33,20 @@ export default [
     component: () => import(`./components/governance/PageProposal`),
     props: true
   },
-  // for depredecated routes
+  // for deprecated routes
   {
     path: `/governance/proposals/:proposalId`,
     redirect: `/proposals/:proposalId`
   },
   {
-    path: `/validators`,
+    path: `/:network/validators`,
     name: `Validators`,
     meta: {
       feature: "Validators"
     },
     component: () => import(`./components/staking/PageValidators`)
   },
-  // for depredecated routes
+  // for deprecated routes
   {
     path: `/staking/validators`,
     redirect: `/validators`
@@ -64,7 +64,7 @@ export default [
     redirect: `/validators/:validator`
   },
   {
-    path: `/portfolio`,
+    path: `/:network/portfolio`,
     name: `portfolio`,
     component: () => import(`./components/wallet/PagePortfolio`),
     meta: {
@@ -73,7 +73,7 @@ export default [
     }
   },
   {
-    path: `/transactions`,
+    path: `/:network/transactions`,
     name: `transactions`,
     component: () => import(`./components/wallet/PageTransactions`),
     meta: {
@@ -90,7 +90,7 @@ export default [
     }
   },
   {
-    path: `/blocks/:height`,
+    path: `/:network/blocks/:height`,
     name: `block`,
     component: () => import(`./components/network/PageBlock`),
     meta: {

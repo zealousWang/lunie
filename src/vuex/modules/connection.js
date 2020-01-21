@@ -1,7 +1,7 @@
 import config from "src/../config"
 import { Networks } from "../../gql"
 
-export default function({ apollo }) {
+export default function ({ apollo }) {
   const state = {
     stopConnecting: false,
     connected: true, // TODO do connection test
@@ -20,18 +20,21 @@ export default function({ apollo }) {
   const actions = {
     async checkForPersistedNetwork({ dispatch, commit }) {
       const persistedNetwork = JSON.parse(localStorage.getItem(`network`))
+      console.log(persistedNetwork)
       const { data } = await apollo.query({
         query: Networks,
         fetchPolicy: "cache-first"
       })
-      let availNetworks = Object.values(data.networks).map(
+      let availableNetworks = Object.values(data.networks).map(
         network => network.id
       )
-      if (persistedNetwork && availNetworks.includes(persistedNetwork)) {
-        await commit(`setNetworkId`, persistedNetwork)
+      if (persistedNetwork && availableNetworks.includes(persistedNetwork)) {
+        console.log(persistedNetwork)
+        commit(`setNetworkId`, persistedNetwork)
+        console.log(state.network)
       } else {
         const defaultNetwork = state.externals.config.network
-        if (availNetworks.find(network => network === defaultNetwork)) {
+        if (availableNetworks.find(network => network === defaultNetwork)) {
           await dispatch(
             `setNetwork`,
             data.networks.find(({ id }) => id === defaultNetwork)
@@ -47,15 +50,17 @@ export default function({ apollo }) {
         }
       }
     },
-    async persistNetwork(store, network) {
-      localStorage.setItem(`network`, JSON.stringify(network.id))
+    async persistNetwork(store, networkId) {
+      console.log('setting persisted network:', networkId)
+      localStorage.setItem(`network`, JSON.stringify(networkId))
     },
-    async setNetwork({ commit, dispatch }, network) {
+    async setNetwork({ commit, dispatch }, networkId) {
+      console.log(2, networkId)
       dispatch(`signOut`)
-      dispatch(`persistNetwork`, network)
-      commit("setNetworkId", network.id)
+      dispatch(`persistNetwork`, networkId)
+      commit("setNetworkId", networkId)
       dispatch(`checkForPersistedSession`) // check for persisted session on that network
-      console.info(`Connecting to: ${network.id}`)
+      console.info(`Connecting to: ${networkId}`)
     }
   }
 

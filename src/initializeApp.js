@@ -45,9 +45,6 @@ export default function init(urlParams, env = process.env) {
   setOptions(urlParams, store)
 
   store.dispatch(`loadLocalPreferences`)
-  store.dispatch(`checkForPersistedNetwork`).then(() => {
-    store.dispatch(`checkForPersistedSession`)
-  })
   store.dispatch(`checkForPersistedAddresses`)
 
   listenToExtensionMessages(store)

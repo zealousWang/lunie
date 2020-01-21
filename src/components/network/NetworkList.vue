@@ -34,7 +34,8 @@ export default {
   methods: {
     async selectNetworkHandler(network) {
       if (this.connection.network !== network.id) {
-        this.$store.dispatch(`setNetwork`, network)
+        console.log(network.id)
+        this.$store.dispatch(`setNetwork`, network.id)
       }
     }
   }
