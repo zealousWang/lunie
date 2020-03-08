@@ -16,14 +16,14 @@
           v-if="!isMobileApp"
           id="use-ledger-nano"
           icon="vpn_key"
-          title="Use Ledger Nano"
+          title="Ledger Nano S/X"
           route="ledger"
         />
         <LiSession
           v-if="!isMobileApp"
           id="use-extension"
           icon="laptop"
-          title="Use Lunie Browser Extension"
+          title="Lunie Browser Extension"
           route="extension"
         >
         </LiSession>

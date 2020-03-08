@@ -1,24 +1,20 @@
 <template>
   <transition name="component-fade" mode="out-in">
     <div class="session-frame">
-      <router-link to="/">
-        <img class="session-logo" src="~assets/images/lunie-logo-white.svg" />
-      </router-link>
       <div class="session-outer-container">
         <div class="session">
-          <a v-if="!hideBack" @click="goBack">
-            <i class="material-icons notranslate circle back">arrow_back</i>
-          </a>
+          <div class="session-modal-buttons">
+            <a v-if="!hideBack" @click="goBack">
+              <i class="material-icons notranslate circle back">arrow_back</i>
+            </a>
+            <a v-if="!hideBack" @click="$router.push(`/`)">
+              <i class="material-icons notranslate circle">close</i></a
+            >
+          </div>
           <slot></slot>
         </div>
       </div>
       <div class="session-close">
-        <TmBtn
-          class="session-close-button"
-          value="Back to Lunie"
-          color="secondary"
-          @click.native="$router.push(`/`)"
-        />
         <a class="user-box" @click="$router.push(`/`)">
           <i class="material-icons notranslate">close</i>
         </a>
@@ -28,13 +24,9 @@
 </template>
 
 <script>
-import TmBtn from "common/TmBtn"
-
 export default {
   name: `session-frame`,
-  components: {
-    TmBtn
-  },
+  components: {},
   props: {
     hideBack: {
       type: Boolean,

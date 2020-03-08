@@ -8,9 +8,9 @@
         <span>{{ title }}</span>
       </div>
     </div>
-    <div class="tm-li-session-icon">
+    <!-- <div class="tm-li-session-icon">
       <i class="material-icons notranslate">arrow_forward</i>
-    </div>
+    </div> -->
   </router-link>
 </template>
 
@@ -40,12 +40,11 @@ export default {
 
 <style scoped>
 .tm-li-session {
-  display: flex;
-  padding: 1rem;
-  margin-bottom: 0.25rem;
-  border: 2px solid var(--bc);
+  padding: 2rem 1.5rem;
+  margin: 0.5rem;
   background-color: var(--app-fg);
   border-radius: 0.25rem;
+  width: 33%;
 }
 
 .tm-li-session:hover {
@@ -54,9 +53,7 @@ export default {
 }
 
 .tm-li-session-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding-bottom: 1rem;
 }
 
 .tm-li-session-icon i {
@@ -73,14 +70,6 @@ export default {
   color: var(--bright);
   font-size: var(--h4);
   font-weight: 400;
-}
-
-.tm-li-session-text {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  flex-flow: column nowrap;
-  padding: 0 1rem;
 }
 
 .material-icons.circle {

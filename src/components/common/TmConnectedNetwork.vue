@@ -1,5 +1,23 @@
 <template>
   <div class="sidebar-bottom">
+    <div class="download-buttons">
+      <TmBtn
+        id="intercom-button"
+        class="ios-button"
+        value="iOS"
+        type="secondary"
+        size="small"
+        @click.native="handleIntercom()"
+      />
+      <TmBtn
+        id="intercom-button"
+        class="android-button"
+        value="Android"
+        type="secondary"
+        size="small"
+        @click.native="handleIntercom()"
+      />
+    </div>
     <TmBtn
       id="intercom-button"
       class="intercom-button"
@@ -166,9 +184,22 @@ export default {
   background: var(--app-nav);
 }
 
+.download-buttons {
+  display: flex;
+}
+
 .intercom-button {
   width: 100%;
   margin: 1rem 0;
+}
+
+.ios-button,
+.android-button {
+  width: 50%;
+}
+
+.ios-button {
+  margin-right: 0.5rem;
 }
 
 .tm-connected-network {

@@ -25,15 +25,24 @@
         type="custom"
       />
     </div>
-    <TmBtn
-      v-else
-      id="sign-in"
-      class="session-link"
-      value="Sign In / Sign Up"
-      type="secondary"
-      size="small"
-      @click.native="signIn()"
-    />
+    <div v-else class="session-buttons">
+      <TmBtn
+        id="sign-in"
+        class="session-link"
+        value="Sign In"
+        type="secondary"
+        size="small"
+        @click.native="signIn()"
+      />
+      <TmBtn
+        id="sign-in"
+        class="session-link"
+        value="Sign Up"
+        type="secondary"
+        size="small"
+        @click.native="signUp()"
+      />
+    </div>
     <div class="app-menu-main">
       <router-link
         class="app-menu-item hide-xs"
@@ -203,7 +212,11 @@ export default {
       this.$store.dispatch(`signOut`, this.network)
     },
     signIn() {
-      this.$router.push(`/welcome`)
+      this.$router.push(`/existing`)
+      this.$emit(`close`)
+    },
+    signUp() {
+      this.$router.push(`/create`)
       this.$emit(`close`)
     },
     async showAddressOnLedger() {
@@ -252,8 +265,17 @@ export default {
   background: var(--hover-bg);
 }
 
+.session-buttons {
+  display: flex;
+  margin: 2rem 1rem 3rem;
+}
+
 .session-link {
-  margin: 2.5rem 1rem 1rem;
+  width: 50%;
+}
+
+.session-link:first-child {
+  margin-right: 0.5rem;
 }
 
 .show-on-ledger {
