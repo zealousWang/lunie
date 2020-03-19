@@ -1,5 +1,23 @@
 import keystoreModule from "src/vuex/modules/keystore.js"
 
+const networks = [
+  {
+    id: "cosmos-hub-testnet",
+    network_type: "cosmos",
+    testnet: true
+  },
+  {
+    id: "cosmos-hub-mainnet",
+    network_type: "cosmos",
+    testnet: false
+  },
+  {
+    id: "terra-testnet",
+    network_type: "terra",
+    testnet: true
+  }
+]
+
 const mockKeysLib = {
   testPassword: () => true,
   getSeed: () => `xxx`,
@@ -30,7 +48,7 @@ describe(`Module: Keystore`, () => {
       query: jest.fn(() => ({
         data: {
           network: {
-            address_creator: "cosmos",
+            network_type: "cosmos",
             address_prefix: "cosmos"
           }
         }
@@ -103,7 +121,11 @@ describe(`Module: Keystore`, () => {
 
   it(`should create an address from a seed phrase`, async () => {
     const address = await actions.getAddressFromSeed(
-      {},
+      {
+        getters: {
+          networks
+        }
+      },
       {
         seedPhrase: `xxx`,
         network: `cosmos-hub-mainnet`
@@ -118,7 +140,13 @@ describe(`Module: Keystore`, () => {
     const name = `def`
     const dispatch = jest.fn()
     await actions.createKey(
-      { dispatch, state },
+      {
+        dispatch,
+        state,
+        getters: {
+          networks
+        }
+      },
       {
         seedPhrase,
         password,
@@ -139,7 +167,13 @@ describe(`Module: Keystore`, () => {
     const name = `def`
     const dispatch = jest.fn()
     await actions.createKey(
-      { dispatch, state },
+      {
+        dispatch,
+        state,
+        getters: {
+          networks
+        }
+      },
       {
         seedPhrase,
         password,
@@ -156,7 +190,13 @@ describe(`Module: Keystore`, () => {
     const name = `def`
     const dispatch = jest.fn()
     const address = await actions.createKey(
-      { dispatch, state },
+      {
+        dispatch,
+        state,
+        getters: {
+          networks
+        }
+      },
       {
         seedPhrase,
         password,
@@ -174,13 +214,20 @@ describe(`Module: Keystore`, () => {
     apollo.query.mockImplementationOnce(() => ({
       data: {}
     }))
+    const dispatch = jest.fn()
 
     const seedPhrase = `abc`
     const password = `123`
     const name = `def`
     await expect(
       actions.createKey(
-        { state },
+        {
+          state,
+          dispatch,
+          getters: {
+            networks
+          }
+        },
         {
           seedPhrase,
           password,

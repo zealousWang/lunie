@@ -112,6 +112,7 @@ export default {
   }),
   computed: {
     ...mapState([`session`]),
+    ...mapGetters([`networkSlug`]),
     ...mapGetters({ networkId: `network` }),
     submitCaption() {
       return {
@@ -139,8 +140,13 @@ export default {
       this.status = `detect`
       this.address = null
       try {
-        this.address = await getAddressFromLedger(this.networkId, this.$apollo)
-        this.$router.push(`/`)
+        this.address = await getAddressFromLedger(this.networkId, this.$store)
+        this.$router.push({
+          name: "portfolio",
+          params: {
+            networkId: this.networkSlug
+          }
+        })
       } catch (error) {
         this.status = `connect`
         this.connectionError = error.message

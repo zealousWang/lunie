@@ -88,7 +88,7 @@ export default {
   }),
   computed: {
     ...mapState([`recover`]),
-    ...mapGetters({ networkId: `network` }),
+    ...mapGetters([`network`, `networkSlug`, `isExtension`]),
     password: {
       get() {
         return this.$store.state.recover.password
@@ -118,9 +118,18 @@ export default {
           seedPhrase: this.recover.seed,
           password: this.recover.password,
           name: this.recover.name,
-          network: this.networkId
+          network: this.network
         })
-        this.$router.push(`/`)
+        if (this.isExtension) {
+          this.$router.push(`/`)
+        } else {
+          this.$router.push({
+            name: "portfolio",
+            params: {
+              networkId: this.networkSlug
+            }
+          })
+        }
       } catch (error) {
         this.error = true
         this.errorMessage = error.message

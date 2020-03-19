@@ -1,17 +1,38 @@
 import { shallowMount } from "@vue/test-utils"
 import TmSessionExtension from "common/TmSessionExtension"
 
-describe(`SessionExtension`, () => {
+describe(`TmSessionExtension`, () => {
   let wrapper, $store, $router
 
   const accounts = [
     {
       address: "cosmos1234",
-      name: "TEST_WALLET"
+      network: "cosmos-hub-mainnet",
+      slug: "cosmos-hub"
     },
     {
       address: "cosmos15678",
-      name: "TEST_WALLET_2"
+      network: "gaia-testnet",
+      slug: "cosmos-hub-testnet"
+    }
+  ]
+
+  const networks = [
+    {
+      id: "gaia-testnet",
+      chain_id: "gaia-123",
+      logo_url: "cosmos-logo.png",
+      testnet: true,
+      title: "Cosmos Hub Test",
+      slug: "gaia"
+    },
+    {
+      id: "cosmos-hub-mainnet",
+      chain_id: "cosmoshub",
+      logo_url: "cosmos-logo.png",
+      testnet: false,
+      title: "Cosmos Hub",
+      slug: "cosmos-hub"
     }
   ]
 
@@ -24,6 +45,10 @@ describe(`SessionExtension`, () => {
     }
 
     $store = {
+      getters: {
+        networkSlug: "cosmos-hub",
+        networks
+      },
       commit: jest.fn(),
       dispatch: jest.fn(),
       state
@@ -37,15 +62,6 @@ describe(`SessionExtension`, () => {
         $router
       }
     })
-
-    wrapper.setData({
-      networks: [
-        {
-          id: "cosmos-hub-mainnet",
-          slug: "cosmos-hub"
-        }
-      ]
-    })
   })
 
   it("should sign in with the selected account", async () => {
@@ -54,7 +70,10 @@ describe(`SessionExtension`, () => {
       address: "cosmos1"
     })
 
-    expect($router.push).toHaveBeenCalledWith("/cosmos-hub/portfolio")
+    expect($router.push).toHaveBeenCalledWith({
+      name: "portfolio",
+      params: { networkId: "cosmos-hub" }
+    })
     expect($store.dispatch).toHaveBeenCalledWith("signIn", {
       sessionType: `extension`,
       address: "cosmos1",

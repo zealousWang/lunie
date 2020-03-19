@@ -1,32 +1,30 @@
 <template>
   <TmPage data-title="Network" class="page" hide-header>
-    <TmDataLoading v-if="$apollo.loading" />
-    <template v-else-if="!$apollo.loading">
+    <template>
       <h3>Main Networks</h3>
       <NetworkList :networks="mainNetworks" />
+
       <h3>Test Networks</h3>
       <NetworkList :networks="testNetworks" />
+
       <h3>Coming Soon</h3>
-      <NetworkList :networks="comingSoon" />
+      <NetworkList :networks="comingSoon" :disabled="true" />
     </template>
   </TmPage>
 </template>
 
 <script>
-import { Networks, NetworksResult } from "src/gql"
+import { mapGetters } from "vuex"
 import NetworkList from "./NetworkList"
-import TmDataLoading from "common/TmDataLoading"
 
 import TmPage from "common/TmPage"
 export default {
-  name: `page-network`,
+  name: `page-networks`,
   components: {
     TmPage,
-    NetworkList,
-    TmDataLoading
+    NetworkList
   },
   data: () => ({
-    networks: [],
     comingSoon: [
       {
         id: "polkadot-mainnet",
@@ -56,18 +54,12 @@ export default {
     ]
   }),
   computed: {
+    ...mapGetters([`networks`]),
     mainNetworks() {
       return this.networks.filter(network => !network.testnet)
     },
     testNetworks() {
       return this.networks.filter(network => network.testnet)
-    }
-  },
-  apollo: {
-    networks: {
-      query: Networks,
-      fetchPolicy: "cache-first",
-      update: NetworksResult
     }
   }
 }
