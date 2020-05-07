@@ -2,7 +2,7 @@
 .emoney-mainnet {
   /* theme colors */
   --primary: hsl(200, 62%, 29%);
-  --primary-hover: hsl(200, 62%, 24%);
+  --primary-hover: hsl(200, 62%, 34%);
   --highlight: hsl(171, 75%, 45%);
   --link: hsl(171, 75%, 26%);
   --link-hover: hsl(171, 75%, 21%);

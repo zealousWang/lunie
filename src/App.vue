@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="network" class="lunie-dark">
+  <div id="app" :class="network">
     <AppHeader />
     <div id="app-content">
       <div id="bar-container">
