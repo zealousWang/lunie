@@ -1,7 +1,7 @@
 .lunie-dark {
 	/* theme colors */
-	--primary: hsl(144, 54%, 60%);
-	--primary-hover: hsl(144, 54%, 55%);
+	--primary: hsl(144, 54%, 50%);
+	--primary-hover: hsl(144, 54%, 45%);
 	--highlight: hsl(7, 88%, 70%);
 	--link: hsl(217, 100%, 70%);
 	--link-hover: hsl(217, 100%, 65%);
@@ -12,8 +12,8 @@
 	--app-bg: hsl(229, 20%, 11%);
 
 	/* menu styles */
-	--app-nav: hsl(229, 20%, 11%);
-	--app-nav-hover: hsl(229, 20%, 16%);
+	--app-nav: hsl(0, 0%, 0%);
+	--app-nav-hover: hsl(0, 0%, 5%);
 	--menu-link: var(--link);
 	--menu-link-hover: var(--link-hover);
 	--menu-border: hsl(229, 20%, 26%);
