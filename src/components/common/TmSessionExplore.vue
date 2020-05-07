@@ -18,7 +18,7 @@
             </div>
             <div class="tm-li-session-text">
               <div class="tm-li-session-title">
-                <span>{{ account.address | formatAddress(12) }}</span>
+                <span>{{ account.address | formatAddress(4) }}</span>
                 <p class="tm-li-session-subtitle">
                   {{ getAddressTypeDescription(account.type) }}
                 </p>
@@ -112,10 +112,6 @@ export default {
       if (!selectedNetwork) return []
 
       return this.session.addresses
-        .filter(address =>
-          address.address.startsWith(selectedNetwork.address_prefix)
-        )
-        .slice(-3)
     }
   },
   mounted() {
