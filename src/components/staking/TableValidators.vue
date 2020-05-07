@@ -58,7 +58,7 @@ export default {
   data: () => ({
     rewards: [],
     sort: {
-      property: `expectedReturns`,
+      property: `votingPower`,
       order: `desc`
     },
     showing: 15
